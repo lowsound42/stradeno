@@ -1,2 +1,4 @@
 activities/
 activities.csv
+
+*.db
