@@ -1,4 +1,7 @@
-activities/
-activities.csv
+strava.db
 
-*.db
+db/db
+
+etl/activities
+
+etl/activities.csv

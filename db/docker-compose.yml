@@ -1,0 +1,17 @@
+services:
+  stravadb:
+    shm_size: 128m
+    image: stravadb:latest
+    ports:
+      - '5432:5432'
+    expose:
+      - 5432
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=lowsound
+      - POSTGRES_USER=lowsound
+      - POSTGRES_DB=strava
+      - PROJ_NETWORK=ON
+      - PGHOST=/var/run/postgresql
+      - PGPORT=5432
