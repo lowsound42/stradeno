@@ -5,3 +5,5 @@ db/db
 etl/activities
 
 etl/activities.csv
+
+.env
