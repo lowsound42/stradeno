@@ -1,4 +1,3 @@
-type CoordinateTuple = [number, number]
 export const createFeature = (data: CoordinateObject[]) => {
     const resultingPoints = {latlngs:[] as CoordinateTuple[], "color": "green"}
     console.log(data.length)
