@@ -1,19 +1,23 @@
 import { Router } from "https://deno.land/x//oak@v16.1.0/mod.ts";
 import connection from "../db/db.ts";
+import { createFeature } from "../geoUtils/pointUtils.ts";
 
 const router = new Router();
 router
   .get("/", async (context) => {
     try {
-      const result = await connection.queryArray(
-        "SELECT * FROM coordinates LIMIT 10;",
+      const result = await connection.queryObject(
+        "SELECT * FROM coordinates order by id asc;",
       );
-      console.log(result.rows); // [[1, 'Carlos'], [2, 'John'], ...]
+      const coordinateObjects = result.rows as CoordinateObject[]
+      const geoFeatures = createFeature(coordinateObjects)
+      context.response.headers.append('Access-Control-Allow-Origin', '*')
+      context.response.body = geoFeatures;
+    } catch (err) {
+        console.log(err) 
     } finally {
       connection.release();
     }
-
-    context.response.body = "Hello world!";
   });
 
 
